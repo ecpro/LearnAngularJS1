@@ -38,11 +38,46 @@ app.controller('secondController', ['$scope', '$log', 'nameService', function ($
 
 }]);
 
-
 app.service("nameService", function () {
 
     this.name = "Jane Doe";
-    
-    
 
 });
+
+app.directive('myDirective', function() {
+    
+    return {
+        templateUrl :  'directives/directive.html',
+        restrict : 'AECM',  // A - attribute, E - element, C - class, M - comment
+        replace : true
+//        // below scope create a isolated scope and this directive no longer inherits from controller if there is any for this template
+//        scope : {
+//            
+//        }
+    };
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
