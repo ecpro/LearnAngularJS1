@@ -10,18 +10,39 @@ app.config(function ($routeProvider) {
             templateUrl: 'pages/main.html',
             controller: 'mainController'
         })
-        .when('/second/:num', {
+        .when('/second', {
             templateUrl: 'pages/second.html',
             controller: 'secondController'
         });
 });
 
 
-app.controller('mainController', ['$scope', '$log', function ($scope, $log) {
-        $scope.pageName = 'Main';
+app.controller('mainController', ['$scope', '$log', 'nameService', function ($scope, $log, nameService) {
+    $scope.pageName = 'Main';
+    $scope.sometext = nameService.name;
+    
+    $scope.$watch("sometext", function() {
+        nameService.name = $scope.sometext;
+    });
+    
 }]);
 
-app.controller('secondController', ['$scope', '$log', '$routeParams', function ($scope, $log, $routeParams) {
-        $scope.pageName = $routeParams.num || 'default';
+app.controller('secondController', ['$scope', '$log', 'nameService', function ($scope, $log, nameService) {
+    $scope.pageName = "second";
+    $scope.sometext = nameService.name;
+    
+    $scope.$watch("sometext", function() {
+        nameService.name = $scope.sometext;
+    });
+
+
 }]);
 
+
+app.service("nameService", function () {
+
+    this.name = "Jane Doe";
+    
+    
+
+});
